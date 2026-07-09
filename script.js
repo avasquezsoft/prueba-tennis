@@ -1,12 +1,18 @@
+console.log('Me esta importando este codigo')
+
 async function consultarClima() {
   const ciudad = document.getElementById('ciudad').value.trim();
   if (!ciudad) return alert('Ingrese una ciudad');
 
   const urlGeo = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(ciudad)}&count=1&language=es&format=json`;
 
+  console.log(urlGeo)
+
   try {
     const geoResp = await fetch(urlGeo);
     const geo = await geoResp.json();
+
+    console.log(geo)
 
     if (!geo.results || geo.results.length === 0) {
       document.getElementById('resultado').innerHTML = 'Ciudad no encontrada';
@@ -19,6 +25,8 @@ async function consultarClima() {
 
     const climaResp = await fetch(urlClima);
     const clima = await climaResp.json();
+
+    console.log(clima)
 
     document.getElementById('resultado').innerHTML = `
       <h3>${lugar.name}, ${lugar.country}</h3>
